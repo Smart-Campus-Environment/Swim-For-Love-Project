@@ -36,3 +36,6 @@ def Demo():
 		random.choice(SwimmerList).Add_Lap()
 		Update()
 		time.sleep(0.6)
+
+if __name__ == '__main__':
+    Demo()
