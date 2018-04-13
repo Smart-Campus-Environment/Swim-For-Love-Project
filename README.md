@@ -11,5 +11,5 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 4. Check localhost
 
 # DEMO
-![Alt DEMO](Swim-For-Love-Project/README_RESOURCES/DEMO.gif)
+![Alt DEMO](https://github.com/Smart-Campus-Environment/Swim-For-Love-Project/README_RESOURCES/DEMO.gif)
 
