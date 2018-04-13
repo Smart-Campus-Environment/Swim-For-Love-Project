@@ -103,8 +103,8 @@
 .container-tally {
     position: absolute;
     right: 5%;
-    top:20%;
-    /*margin-top: -46px;*/
+    /*top:20%;*/
+    margin-top: -46px;
 }
 
 .tally.title {
