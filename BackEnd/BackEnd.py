@@ -36,8 +36,21 @@ def Read():
 		SwimmerList=[] # Creating Empty Package List
 		Save() # Call on SavePackageList Function
 
+def AddSwimmer():
+	UID=input('UID:')
+	for i in SwimmerList:
+		if(UID==i.UID):
+			print('Swimmer Exists')
+			return
+	Name=input('Name:')
+	for i in SwimmerList:
+		if(Name==i.Name):
+			if(input('Swimmer Name Exists, proceed? (Y or N):')=='N'):
+				return
+		else:
+			SwimmerList.append(Swimmer(UID,Name))
+
 def Update():
-	os.system('rm -f stat_all.json')
 	Content='{'
 	for i in SwimmerList:
 		with open('Swimmers/'+i.UID+'/stat.json', mode='w', encoding='utf-8') as stat:
