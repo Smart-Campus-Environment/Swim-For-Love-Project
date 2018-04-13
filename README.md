@@ -5,4 +5,8 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 
 # How To Run
 
-Clone this project to under your Web Server Directory
+1. Clone this project to under your Web Server Directory
+2. cd to Web Server Directory
+3. run "python3 -i BackEnd/BackEnd.py"
+4. run "Demo()"
+5. Check localhost
