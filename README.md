@@ -10,6 +10,6 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 3. run `python3 BackEnd/BackEnd.py`
 4. Check localhost
 
-
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+# DEMO
+![Alt DEMO](Swim-For-Love-Project/README_RESOURCES/DEMO.gif)
 
