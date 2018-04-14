@@ -6,7 +6,8 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 # Demo
 ![GIF of demonstration](https://github.com/Smart-Campus-Environment/Swim-For-Love-Project/blob/master/assets/demo.gif)
 
-# Current Complete Functions:
+# Functionalities
+
 1. Swimmer as an Object
 2. Add Swimmer
 3. Update stat_all.json
@@ -15,7 +16,8 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 5. Read from Save Function
 
 
-# To-Do List:
+# To-Do's
+
 1. Read from RFID Reader
 2. Check swimmer status
 3. Individual Swimmer Stat Page
@@ -23,7 +25,7 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 5. Playground_Auth HTML5 Page
 6. Milestone Congrats
 
-# How To Run
+# How to Run
 
 1. Clone this repository under your web server directory.
 
@@ -31,9 +33,8 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 
 2. `cd` to your web server directory.
 
-3. Run `python3 back-end/back-end.py`.
+3. Run `python3 back-end/back-end.py -n`, the option `-n` lets the Python script generate a new data, if you want to use existing data, ignore the `-n` option, and just do `python3 back-end/back-end.py`
 
 4. In the browser, open `localhost/Swim-For-Love-Project`.
 
-
-
+5. To stop the demo, simply do `Ctrl + c` in the terminal, your data will be automatically saved to `Swimmer_Database.pickle` for you to use next time.
