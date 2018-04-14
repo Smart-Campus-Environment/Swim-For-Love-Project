@@ -21,7 +21,7 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 3. Individual Swimmer Stat Page
 4. Certificate HTML5 Page
 5. Playground_Auth HTML5 Page
-
+6. Milestone Congrats
 
 # How To Run
 
