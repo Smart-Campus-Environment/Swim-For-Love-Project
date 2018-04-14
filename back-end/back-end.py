@@ -8,7 +8,7 @@ import sys
 
 SWIMMERS_DIR = Path('swimmers')
 EXAMPLE_DIR = Path('resources/swimmer_template')
-PICKLE_FILE = 'Swimmer_Database.pickle'
+PICKLE_FILE = Path('Swimmer_Database.pickle')
 STAT_FILE = 'stat_all.json'
 
 class Swimmer:
@@ -34,13 +34,13 @@ class Swimmer:
 				json.dump(self.stat, self.statFile.open('w', encoding='utf-8'), indent=4)
 
 def dump_data():
-		with open(PICKLE_FILE, 'wb') as handle:
+		with PICKLE_FILE.open('wb') as handle:
 				pickle.dump(swimmers, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 def load_data():
 		global swimmers
 		try: # Trying
-				swimmers = pickle.load(open(PICKLE_FILE, 'rb'))
+				swimmers = pickle.load(PICKLE_FILE.open('rb'))
 		except IOError: # When IOError Occurs
 				swimmers = [] # Creating Empty Package List
 				dump_data()
@@ -110,12 +110,12 @@ def demo():
 if __name__ == '__main__':
 		swimmers = []
 		try:
-				if not Path(PICKLE_FILE).is_file():
-					init_data()
+				if not PICKLE_FILE.is_file():
+						init_data()
 				elif '--no-read' not in sys.argv and '-n' not in sys.argv:
-					load_data()
+					  load_data()
 				else:
-					init_data()
+					  init_data()
 				demo()
 		except KeyboardInterrupt:
 				dump_data()
