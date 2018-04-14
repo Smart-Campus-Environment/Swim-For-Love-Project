@@ -1,10 +1,10 @@
-# Swim For Love Lap Counter
+# *Swim For Love* Lap Counter
 
 A project for counting laps and displaying a leaderboard for the Swim For Love event.
 
 
-# DEMO
-![Alt DEMO](https://github.com/Smart-Campus-Environment/Swim-For-Love-Project/blob/master/README_RESOURCES/DEMO.gif)
+# Demo
+![GIF of demonstration](https://github.com/Smart-Campus-Environment/Swim-For-Love-Project/blob/master/assets/demo.gif)
 
 # Current Complete Functions:
 1. Swimmer as an Object
@@ -15,7 +15,7 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 5. Read from Save Function
 
 
-# To do List:
+# To-Do List:
 1. Read from RFID Reader
 2. Check swimmer status
 3. Individual Swimmer Stat Page
@@ -25,10 +25,15 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 
 # How To Run
 
-1. Clone this project to under your Web Server Directory
-2. cd to Web Server Directory
-3. run `python3 BackEnd/BackEnd.py`
-4. Check localhost
+1. Clone this repository under your web server directory.
+
+```git clone https://github.com/Smart-Campus-Environment/Swim-For-Love-Project.git```
+
+2. `cd` to your web server directory.
+
+3. Run `python3 back-end/back-end.py`.
+
+4. In the browser, open `localhost/Swim-For-Love-Project`.
 
 
 

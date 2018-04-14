@@ -6,8 +6,8 @@ import pickle
 import json
 import sys
 
-SWIMMERS_DIR = Path('Swimmers')
-EXAMPLE_DIR = Path('resources/Example_Swimmer')
+SWIMMERS_DIR = Path('swimmers')
+EXAMPLE_DIR = Path('resources/swimmer_template')
 PICKLE_FILE = 'Swimmer_Database.pickle'
 STAT_FILE = 'stat_all.json'
 
