@@ -77,6 +77,49 @@ def init_data():
 					'Akhila Stoyanka']
 	for i, name in enumerate(demo_names):
 		swimmers.append(Swimmer(hex(2625070352 + i)[2:].upper(), name))
+# Johnson Code
+
+
+def generate_random_swimmer_data():
+	num_detected = random.randint(0, len(swimmers))
+	
+	n = random.randint(0, 5)
+	global scanned
+	scanned = {}
+	
+	while n<len(swimmers):
+		scanned[swimmers[n].uid] = -1 * random.randint(5, 100)
+		n += random.randint(0, 3)
+		
+	print('print')
+	print(json.dumps(scanned, sort_keys=True, indent=4))
+	json.dump(scanned, SWIMMER_SCAN_FILE.open('w', encoding = 'utf-8'), indent=4)
+		
+def initialize_swimmer_data():
+	global time_data
+	time_data = {}
+	for swimmer in swimmers:
+		time_data[swimmer] = 0
+
+def analyze_swimmer_data():
+	with open(SWIMMER_SCAN_FILE) as json_file:
+		scanned_data = json.load(json_file)
+	print(scanned_data)
+	for uid, strength in scanned_data.items():
+		for swimmer, ticks in time_data.items():
+			if swimmer.uid == uid:
+				if (time.time() - ticks) > TIME_INTERVAL_BETWEEN_DETECTION	:
+					if (strength < MAXIMUM_SIGNAL_STRENGTH) and (MINIMUM_SIGNAL_STRENGTH < strength):
+						time_data[swimmer] = time.time()
+						swimmer.add_lap()
+						print('Lap added')
+
+
+
+
+# Johnson Code
+
+
 
 def clear_data():
 
