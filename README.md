@@ -29,7 +29,7 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 
 1. Clone this repository under your web server directory.
 
-```git clone https://github.com/Smart-Campus-Environment/Swim-For-Love-Project.git```
+	```git clone https://github.com/Smart-Campus-Environment/Swim-For-Love-Project.git```
 
 2. `cd` to your web server directory.
 
