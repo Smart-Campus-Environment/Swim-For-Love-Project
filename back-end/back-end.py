@@ -11,7 +11,10 @@ SWIMMERS_DIR = Path('swimmers')
 EXAMPLE_DIR = Path('resources/swimmer_template')
 PICKLE_FILE = Path('Swimmer_Database.pickle')
 STAT_FILE = Path('stat_all.json')
-
+SWIMMER_SCAN_FILE = Path('scanned.json')
+MINIMUM_SIGNAL_STRENGTH = -50
+MAXIMUM_SIGNAL_STRENGTH = -5
+TIME_INTERVAL_BETWEEN_DETECTION = 20
 class Swimmer:
 	'''Base class for all swimmers.'''
 
@@ -129,6 +132,7 @@ def clear_data():
 			os.remove('Swimmer_Database.pickle')
 			shutil.rmtree('swimmers')
 			os.remove('stat_all.json')
+			os.remove('scanned.json')
 			print('Files Deleted')
 		except FileNotFoundError:
 			print('Files Not Exist')
@@ -159,10 +163,12 @@ def update_stat():
 
 def demo():
 	while True:
-		chosenOne = random.choice(swimmers)
-		chosenOne.add_lap()
-		chosenOne.update_stat()
+		# chosenOne = random.choice(swimmers)
+		# chosenOne.add_lap()
+		# chosenOne.update_stat()
 		update_stat()
+		generate_random_swimmer_data()
+		analyze_swimmer_data()
 		time.sleep(random.uniform(1, 3))
 
 if __name__ == '__main__':
@@ -177,6 +183,7 @@ if __name__ == '__main__':
 	else:
 		load_data()
 	try:
+		initialize_swimmer_data()
 		demo()
 	except KeyboardInterrupt:
 		dump_data()
