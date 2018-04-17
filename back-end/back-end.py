@@ -6,8 +6,14 @@
   ____) |  \  /\  /   _| |_| |  | | | |   | |__| | | \ \  | |___| |__| | \  /  | |____ 
  |_____/    \/  \/   |_____|_|  |_| |_|    \____/|_|  \_\ |______\____/   \/   |______|
                                                                                        
-                                                                                       
+
+IMPORTANT NOTICE
+*** PLEASE RUN 'Python3 backend/backend.py -c' BEFORE YOU COMMIT!
+
+
 """
+
+
 
 import random
 import time
@@ -103,9 +109,9 @@ def generate_random_swimmer_data():
 	while n<len(swimmers):
 		scanned[swimmers[n].uid] = -1 * random.randint(5, 100)
 		n += random.randint(0, 3)
-		
-	print('print')
-	print(json.dumps(scanned, sort_keys=True, indent=4))
+	if Debug==1:
+		print('Debug Info:')
+		print(json.dumps(scanned, sort_keys=True, indent=4))
 	json.dump(scanned, SWIMMER_SCAN_FILE.open('w', encoding = 'utf-8'), indent=4)
 		
 def initialize_swimmer_data():
@@ -117,7 +123,8 @@ def initialize_swimmer_data():
 def analyze_swimmer_data():
 	with open(SWIMMER_SCAN_FILE) as json_file:
 		scanned_data = json.load(json_file)
-	print(scanned_data)
+	if Debug==1:
+		print(scanned_data)
 	for uid, strength in scanned_data.items():
 		for swimmer, ticks in time_data.items():
 			if swimmer.uid == uid:
@@ -125,7 +132,8 @@ def analyze_swimmer_data():
 					if (strength < MAXIMUM_SIGNAL_STRENGTH) and (MINIMUM_SIGNAL_STRENGTH < strength):
 						time_data[swimmer] = time.time()
 						swimmer.add_lap()
-						print('Lap added')
+						if Debug==1:		
+							print('+'+swimmer.name+' Lap added')
 
 
 def clear_data():
@@ -170,6 +178,8 @@ def demo():
 		# chosenOne = random.choice(swimmers)
 		# chosenOne.add_lap()
 		# chosenOne.update_stat()
+		if Debug==1:
+			os.system('clear')
 		generate_random_swimmer_data()
 		analyze_swimmer_data()
 		update_stat()
@@ -177,8 +187,22 @@ def demo():
 
 if __name__ == '__main__':
 	swimmers = []
+	if '--debug' in sys.argv or '-d' in sys.argv:
+		Debug=1
+	else:
+		Debug=0
 	if '--clear-data' in sys.argv or '-c' in sys.argv:	
 		clear_data()
+		exit()
+	if '--help' in sys.argv or '-h' in sys.argv:
+		print('''
+
+-h	Show this help function
+-n	Create new statistics
+-c	Delete all swimmer files and statistics
+-d	Show Debug Information (Verbose Output)
+
+			''')
 		exit()
 	elif not PICKLE_FILE.is_file():
 		init_data()
