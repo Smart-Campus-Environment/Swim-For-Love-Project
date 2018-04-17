@@ -1,3 +1,14 @@
+"""
+   _______          _______ __  __   ______ ____  _____    _      ______      ________ 
+  / ____\ \        / /_   _|  \/  | |  ____/ __ \|  __ \  | |    / __ \ \    / /  ____|
+ | (___  \ \  /\  / /  | | | \  / | | |__ | |  | | |__) | | |   | |  | \ \  / /| |__   
+  \___ \  \ \/  \/ /   | | | |\/| | |  __|| |  | |  _  /  | |   | |  | |\ \/ / |  __|  
+  ____) |  \  /\  /   _| |_| |  | | | |   | |__| | | \ \  | |___| |__| | \  /  | |____ 
+ |_____/    \/  \/   |_____|_|  |_| |_|    \____/|_|  \_\ |______\____/   \/   |______|
+                                                                                       
+                                                                                       
+"""
+
 import random
 import time
 import shutil
@@ -6,6 +17,7 @@ import pickle
 import json
 import sys
 import os
+
 
 SWIMMERS_DIR = Path('swimmers')
 EXAMPLE_DIR = Path('resources/swimmer_template')
@@ -80,8 +92,6 @@ def init_data():
 					'Akhila Stoyanka']
 	for i, name in enumerate(demo_names):
 		swimmers.append(Swimmer(hex(2625070352 + i)[2:].upper(), name))
-# Johnson Code
-
 
 def generate_random_swimmer_data():
 	num_detected = random.randint(0, len(swimmers))
@@ -116,12 +126,6 @@ def analyze_swimmer_data():
 						time_data[swimmer] = time.time()
 						swimmer.add_lap()
 						print('Lap added')
-
-
-
-
-# Johnson Code
-
 
 
 def clear_data():
@@ -166,9 +170,9 @@ def demo():
 		# chosenOne = random.choice(swimmers)
 		# chosenOne.add_lap()
 		# chosenOne.update_stat()
-		update_stat()
 		generate_random_swimmer_data()
 		analyze_swimmer_data()
+		update_stat()
 		time.sleep(random.uniform(1, 3))
 
 if __name__ == '__main__':
