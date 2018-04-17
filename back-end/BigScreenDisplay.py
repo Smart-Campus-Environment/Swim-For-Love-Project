@@ -8,6 +8,10 @@ osascript -e '
 tell application "Safari"
 	activate
 end tell
+
+
+tell application "System Events" to keystroke "f" using {command down, control down}
+
 tell application "System Events"
 	tell process "Safari"
 		tell menu item "Always Show Toolbar in Full Screen" of menu "View" of menu bar 1
