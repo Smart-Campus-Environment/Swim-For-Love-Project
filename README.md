@@ -34,9 +34,9 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 2. `cd` to your web server directory.
 
 3. Run `python3 back-end/back-end.py -n`, the option `-n` lets the Python script generate a new data, if you want to use existing data, ignore the `-n` option, and just do `python3 back-end/back-end.py`
+4. Run `python3 back-end/back-end.py -h` to show help information.
+5. Run `python3 back-end/back-end.py -c`, the option `-c` lets the Python script to delete all statistics files including the swimmer directory.
 
-4. Run `python3 back-end/back-end.py -c`, the option `-c` lets the Python script to delete all statistics files including the swimmer directory.
+6. In the browser, open `localhost/Swim-For-Love-Project`.
 
-5. In the browser, open `localhost/Swim-For-Love-Project`.
-
-6. To stop the demo, simply do `Ctrl + c` in the terminal, your data will be automatically saved to `Swimmer_Database.pickle` for you to use next time.
+7. To stop the demo, simply do `Ctrl + c` in the terminal, your data will be automatically saved to `Swimmer_Database.pickle` for you to use next time.
