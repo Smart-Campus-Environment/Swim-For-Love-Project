@@ -61,7 +61,7 @@
 }
 
 .rank-title {
-    top: calc(46px * 1.5 - 4px);
+    top: calc(52px * 1.5 - 4px);
     left: 0;
     text-align: right;
     font-weight: bold;
