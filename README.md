@@ -40,3 +40,5 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 6. In the browser, open `localhost/Swim-For-Love-Project`.
 
 7. To stop the demo, simply do `Ctrl + c` in the terminal, your data will be automatically saved to `Swimmer_Database.pickle` for you to use next time.
+
+Yeah!
