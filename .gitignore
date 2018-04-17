@@ -1,4 +1,7 @@
 .DS_Store
+*/.DS_Store
+*/*/.DS_Store
 stat_all.json
+scanned.json
 Swimmer_Database.pickle
 swimmers
