@@ -46,7 +46,7 @@
 
 .container-leader {
     position: absolute;
-    left: 11%;
+    left: 14%;
     width: 60%;
     margin-top: -50px;
     font-size: 46px;
@@ -102,7 +102,7 @@
 
 .container-tally {
     position: absolute;
-    right: 5%;
+    right: 11%;
     /*top:20%;*/
     margin-top: -46px;
 }
