@@ -1,10 +1,10 @@
 import os
 import time
 
-wait_time=5
+wait_time = 5
 
 os.system("""
-osascript -e '	
+osascript -e '
 tell application "Safari"
 	activate
 end tell
@@ -31,4 +31,3 @@ def Demo():
 		UID=input('UID:').upper()
 		browser('localhost/Swim-For-Love-Project/swimmers/'+UID+'/index.html')
 		time.sleep(wait_time)
-

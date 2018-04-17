@@ -50,8 +50,8 @@ function update_leaderboard() {
         change_rank(id, i);
         let diffLaps = laps - parseInt($(`#${id} .laps`).text());
         if (diffLaps > 0) {
-            $(`#${id} .laps`).text(laps);
-            add_meters(id, diffLaps);
+            increment($(`#${id} .laps`), diffLaps);
+            increment($(`#${id} .meters`), diffLaps * LAP_LENGTH);
         }
     });
 }
@@ -59,15 +59,17 @@ function update_leaderboard() {
 function tally(newTotal) {
     let tallyDiff = newTotal - totalLaps;
     if (tallyDiff > 0) {
-        let totalMeters = totalLaps * LAP_LENGTH;
-        let lapUpdateInterval = METER_UPDATE_SPAN / LAP_LENGTH / tallyDiff;
-        let meterUpdateInterval = METER_UPDATE_SPAN / tallyDiff;
-        for (let i = 0; i < tallyDiff; i++) {
-            setTimeout(() => tallyLap.text(parseInt(tallyLap.text()) + 1), i * meterUpdateInterval);
-            for (let j = 0; j < LAP_LENGTH; j++) {
-                setTimeout(() => tallyMeter.text(parseInt(tallyMeter.text()) + 1), (i * LAP_LENGTH + j) * lapUpdateInterval);
-            }
-        }
+        increment(tallyLap, tallyDiff);
+        increment(tallyMeter, tallyDiff * LAP_LENGTH);
         totalLaps = newTotal;
     }
+}
+
+function increment(element, updateCount) {
+    let current = parseInt(element.text());
+    element.prop('counter', current).animate({counter: current + updateCount}, {
+        duration: METER_UPDATE_SPAN,
+        easing: 'swing',
+        step: now => element.text(Math.ceil(now))
+    })
 }

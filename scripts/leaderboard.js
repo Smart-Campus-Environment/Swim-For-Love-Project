@@ -16,15 +16,6 @@ function initLeaderboard() {
     });
 }
 
-function add_meters(id, updateCount) {
-    // Very inefficient approach, optimization needed!
-    let element = $(`#${id} .meters`);
-    let updateInterval = METER_UPDATE_SPAN / LAP_LENGTH / updateCount;
-    for (let i = 1; i <= LAP_LENGTH * updateCount; i++) {
-        setTimeout(() => element.text(parseInt(element.text()) + 1), i * updateInterval);
-    }
-}
-
 function get_rank(laps, compareArray=topTen) {
     for (var i = 0; i < compareArray.length; i++) if (laps >= compareArray[i].laps) return i;
     return null;
