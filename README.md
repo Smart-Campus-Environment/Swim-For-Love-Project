@@ -8,12 +8,16 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 
 # Functionalities
 
+
+
 1. Swimmer as an Object
 2. Add Swimmer
 3. Update stat_all.json
 4. Update stat.json of each swimmer
 5. Save Function
 5. Read from Save Function
+6. New Feature: BigScreenDisplay.py
+	Open Safari to set URL, and waits for input to take to swimmer stat page.
 
 
 # To-Do's
