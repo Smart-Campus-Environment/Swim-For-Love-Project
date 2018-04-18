@@ -57,7 +57,6 @@ function update_leaderboard() {
             insert_player(e, null, i, false);
             return;
         }
-        // console.log(e, i);
         let diffLaps = laps - parseInt($(`#${id} .laps`).text());
         if (diffLaps > 0) {
             increment($(`#${id} .laps`), diffLaps);
