@@ -88,6 +88,7 @@ def analyze_data():
         scanned_data = json.load(SWIMMER_SCAN_FILE.open(encoding='utf-8'))
     if DEBUG:
         logger.debug(scanned_data)
+
     for uid, strength in scanned_data.items():
         for swimmer, ticks in timestamps.items():
             timestamp = time.time()
@@ -164,7 +165,7 @@ if __name__ == '__main__':
     else:
         load_data()
 
-    timestamps = {uid: 0 for uid in swimmers}
+    timestamps = {swimmer: 0 for swimmer in swimmers}
     try:
         demo()
     except KeyboardInterrupt:
