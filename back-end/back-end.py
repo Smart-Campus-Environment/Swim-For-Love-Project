@@ -15,11 +15,15 @@ import pickle
 import json
 import sys
 import os
+import argparse
 from config import *
 from utils import *
 from demo import *
 
 logger = Logger('main')
+
+DEBUG = False
+timestamps = {}
 
 class Swimmer:
     '''Base class for swimmers.'''
@@ -64,62 +68,51 @@ def init_data():
     for i, name in enumerate(DEMO_NAMES):
         swimmers.append(Swimmer(hex(2625070352 + i)[2:].upper(), name))
 
-def generate_random_swimmer_data():
+def gen_rand_data():
+    '''Simulate and generate random scanned data.'''
     num_detected = random.randint(0, len(swimmers))
-
     n = random.randint(0, 5)
-    global scanned
     scanned = {}
 
-    while n<len(swimmers):
-        scanned[swimmers[n].uid] = -1 * random.randint(5, 100)
+    while n < len(swimmers):
+        scanned[swimmers[n].uid] = -random.randint(5, 100)
         n += random.randint(0, 3)
-    if Debug==1:
+    if DEBUG:
         logger.debug(json.dumps(scanned, sort_keys=True, indent=4))
-    json.dump(scanned, SWIMMER_SCAN_FILE.open('w', encoding = 'utf-8'), indent=4)
+    json.dump(scanned, SWIMMER_SCAN_FILE.open('w', encoding='utf-8'), indent=4)
 
-def initialize_swimmer_data():
-    global time_data
-    time_data = {}
-    for swimmer in swimmers:
-        time_data[swimmer] = 0
-
-def analyze_swimmer_data():
+def analyze_data():
+    '''Analyze swimmer's data and add laps accordingly.'''
+    scanned_data = {}
     if SWIMMER_SCAN_FILE.is_file():
         scanned_data = json.load(SWIMMER_SCAN_FILE.open(encoding='utf-8'))
-    else:
-        scanned_data = {}
-    if Debug==1:
+    if DEBUG:
         logger.debug(scanned_data)
     for uid, strength in scanned_data.items():
-        for swimmer, ticks in time_data.items():
-            if swimmer.uid == uid:
-                if (time.time() - ticks) > TIME_INTERVAL_BETWEEN_DETECTION  :
-                    if (strength < MAXIMUM_SIGNAL_STRENGTH) and (MINIMUM_SIGNAL_STRENGTH < strength):
-                        time_data[swimmer] = time.time()
-                        swimmer.add_lap()
-                        if Debug==1:
-                            logger.debug('+'+swimmer.name+' Lap added')
-
+        for swimmer, ticks in timestamps.items():
+            timestamp = time.time()
+            if swimmer.uid == uid and timestamp - ticks > DETECTION_INTERVAL and MIN_SIGNAL_STRENGTH < strength < MAX_SIGNAL_STRENGTH:
+                timestamps[swimmer] = timestamp
+                swimmer.add_lap()
+                if DEBUG:
+                    logger.debug('Added lap for {}'.format(swimmer.name))
+                break
 
 def delete_data_files():
     '''Deletes all data files, including the pickle file,
     swimmers directories, stat_all.json, scanned.json'''
-    confirm = input('This will delete all data files, proceed? [Y/N]: ')
+    confirm = input('This will remove all data files, proceed? [Y/N]: ')
     if confirm.upper() in ('Y', 'YES'):
-        #########################################################
-        ## NEEDS FIX, DELETE ONE AT A TIME, IF NOT FOUND, SKIP ##
-        #########################################################
-        try:
-            os.remove('Swimmer_Database.pickle')
-            shutil.rmtree('swimmers')
-            os.remove('stat_all.json')
-            os.remove('scanned.json')
-            logger.info('Files Deleted')
-        except FileNotFoundError:
-            logger.warning('Files not found')
+        for f in (PICKLE_FILE, STAT_FILE, SWIMMER_SCAN_FILE, SWIMMERS_DIR):
+            if f.is_file():
+                f.unlink()
+            elif f.is_dir():
+                shutil.rmtree(f.as_posix())
+            else:
+                logger.warn('Cannot find file or directory {}'.format(f.as_posix()))
+        logger.info('Files removed')
     else:
-        logger.info('Files not deleted')
+        logger.info('Files not removed')
 
 def add_swimmer():
     '''Manually append a user to swimmers.'''
@@ -138,6 +131,7 @@ def add_swimmer():
     swimmers.append(Swimmer(uid, name))
 
 def update_stat():
+    '''Save data for all swimmers and all data.'''
     allData = {}
     for swimmer in swimmers:
         json.dump(swimmer.stat, swimmer.statFile.open('w', encoding='utf-8'), indent=4)
@@ -146,41 +140,32 @@ def update_stat():
     dump_data()
 
 def demo():
+    '''A demonstration that simulates the real life situation.'''
     while True:
-        # chosenOne = random.choice(swimmers)
-        # chosenOne.add_lap()
-        # chosenOne.update_stat()
-        if Debug==1:
+        if DEBUG:
             os.system('clear')
-        generate_random_swimmer_data()
-        analyze_swimmer_data()
+        gen_rand_data()
+        analyze_data()
         update_stat()
-        time.sleep(random.uniform(1, 3))
+        time.sleep(1)
 
 if __name__ == '__main__':
     swimmers = []
     if '--debug' in sys.argv or '-d' in sys.argv:
-        Debug=1
-    else:
-        Debug=0
+        DEBUG = True
     if '--clear-data' in sys.argv or '-c' in sys.argv:
         delete_data_files()
         exit()
     if '--help' in sys.argv or '-h' in sys.argv:
-        print('''\n
--h  Show this help function
--n  Create new statistics
--c  Delete all swimmer files and statistics
--d  Show Debug Information (Verbose Output)\n\n''')
+        print(HELP_MSG)
         exit()
-    elif not PICKLE_FILE.is_file():
-        init_data()
-    elif '--no-read' in sys.argv or '-n' in sys.argv:
+    if ('--new' in sys.argv or '-n' in sys.argv) or not PICKLE_FILE.is_file():
         init_data()
     else:
         load_data()
+
+    timestamps = {uid: 0 for uid in swimmers}
     try:
-        initialize_swimmer_data()
         demo()
     except KeyboardInterrupt:
         dump_data()

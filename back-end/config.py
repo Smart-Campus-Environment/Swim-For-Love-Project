@@ -8,6 +8,14 @@ STAT_FILE = Path('stat_all.json')
 SWIMMER_SCAN_FILE = Path('scanned.json')
 
 # Thresholds
-MINIMUM_SIGNAL_STRENGTH = -50
-MAXIMUM_SIGNAL_STRENGTH = -5
-TIME_INTERVAL_BETWEEN_DETECTION = 20
+MIN_SIGNAL_STRENGTH = -50
+MAX_SIGNAL_STRENGTH = -5
+DETECTION_INTERVAL = 20
+
+# Misc
+HELP_MSG = '''
+Arguments:
+ -h, --help         Show this help message and exit
+ -n, --new          Create new statistics (default: use existing data)
+ -c, --clear-data   Delete all swimmer files and statistics and exit
+ -d, --debug        Show debugging information (verbose output)\n'''
