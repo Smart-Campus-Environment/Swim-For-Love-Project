@@ -53,6 +53,7 @@ function change_rank(id, newRank) {
         return;
     };
     if (parseInt($(`#${id}`).attr('data-rank')) === newRank) return;
+    // console.log(`Change ${id} to rank ${newRank}`);
     // Move this player to new position
     $(`#${id} *`).css('top', (newRank + 1) * LEADER_LINE_HEIGHT);
     $(`#${id}`).attr('data-rank', newRank);

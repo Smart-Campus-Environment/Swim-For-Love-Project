@@ -61,7 +61,7 @@
 }
 
 .rank-title {
-    top: calc(52px * 1.5 - 4px);
+    top: calc(46px * 1.5 - 4px);
     left: 0;
     text-align: right;
     font-weight: bold;
@@ -71,6 +71,18 @@
 .rank-title > :nth-of-type(-n+3) {
     margin-right: -10px;
 }
+
+/* .rank-title > :nth-of-type(1) {
+  background: gold;
+}
+
+.rank-title > :nth-of-type(2) {
+  background: #C0C0C0;
+}
+
+.rank-title > :nth-of-type(3) {
+  background: #CD7F32;
+} */
 
 /* .leader.rank > span:nth-child(1)::before {
     content: '🥇';
