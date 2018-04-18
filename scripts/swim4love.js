@@ -25,7 +25,7 @@ function retrieve_data(callback=update_leaderboard) {
         let data = keys.map((e, i) => Object({id: e, name: values[i][0], laps: values[i][1]}));
         data.forEach((e, i) => {
             let id = e.id
-            if (timestamp[id] === undefined || (previousData[id] !== undefined && e.laps - previousData[id] > 0)) {
+            if (timestamp[id] === undefined || (previousData[id] !== undefined && e.laps - previousData[id] !== 0)) {
                 timestamp[id] = Date.now() + i;
             }
             previousData[id] = e.laps;
@@ -58,7 +58,7 @@ function update_leaderboard() {
             return;
         }
         let diffLaps = laps - parseInt($(`#${id} .laps`).text());
-        if (diffLaps > 0) {
+        if (diffLaps !== 0) {
             increment($(`#${id} .laps`), diffLaps);
             increment($(`#${id} .meters`), diffLaps * LAP_LENGTH);
         }
@@ -68,7 +68,7 @@ function update_leaderboard() {
 
 function tally(newTotal) {
     let tallyDiff = newTotal - totalLaps;
-    if (tallyDiff > 0) {
+    if (tallyDiff !== 0) {
         increment(tallyLap, tallyDiff);
         increment(tallyMeter, tallyDiff * LAP_LENGTH);
         totalLaps = newTotal;
