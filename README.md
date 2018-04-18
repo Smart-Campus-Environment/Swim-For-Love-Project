@@ -4,7 +4,7 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 
 
 # Demo
-![GIF of demonstration](https://github.com/Smart-Campus-Environment/Swim-For-Love-Project/blob/master/assets/demo.gif)
+![GIF of demonstration](https://github.com/Smart-Campus-Environment/Swim-For-Love-Project/blob/master/assets/demo-v2.gif)
 
 # Functionalities
 
