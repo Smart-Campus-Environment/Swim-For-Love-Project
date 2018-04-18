@@ -1,59 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <meta charset='utf-8'>
+  <link rel='icon' href='favicon.ico' type='image/x-icon' />
   <link rel='stylesheet' href='main.css'>
-  <title>Leaderboard | Swim For Love</title>
+  <script type='text/javascript' src='../../libraries/jquery.min.js'></script>
+  <script type='text/javascript' src='../../scripts/config.js'></script>
+  <script type='text/javascript' src='main.js'></script>
+  <title>Personal Stats | Swim For Love</title>
 </head>
 
 <body>
   <div class='container-main'>
     <!-- Header -->
     <div class='container-header'>
-      <!-- <h1 class='title'>Swim For Love<br />2018</h1> -->
       <h1 class='title'>2018<br />Swim For Love</h1>
       <div class='sep'></div>
-      <h2 class='page'>Personal Achievements</h2>
+      <h2 class='page'>Achievements</h2>
     </div>
-    <!-- Leaderboard -->
 
-    <div class='Avatar'>
-      <img class='container-avatar' height="450" width="450" src="avatar.jpg">
-    </div>
-     
-      <div class='leaderboard'></div>
-    </div>
-    <div class='container-tally'>
-      <!-- Tallies -->
-      <div class='tally-laps'>
-        <span class='tally laps title'>Swimmer Name</span>
-        <span class='tally laps num' id="Name">0</span>
+    <!-- Main stats -->
+    <div class='container-stat'>
+      <div class='stat avatar'>
+        <img id='avatar' src='avatar.jpg'>
+      </div><br />
+      <div class='stat name'>
+        <span class='big' id='name'></span>
+      </div><br />
+      <div class='stat laps'>
+        <span class='small'>Total Laps</span>
+        <span class='big' id='laps'>0</span>
       </div>
-      <div class='tally-laps'>
-        <span class='tally laps title'>Total Laps</span>
-        <span class='tally laps num' id="Lap_Count">0</span>
-      </div>
-      <div class='tally-meters'>
-        <span class='tally meters title'>Total Distance</span>
-        <span class='tally meters num' id="Distance">0</span>
-
-        <script>
-
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var myObj = JSON.parse(this.responseText);
-                document.getElementById("Name").innerHTML = myObj.name;
-                document.getElementById("Lap_Count").innerHTML = myObj.laps;
-                document.getElementById("Distance").innerHTML = myObj.laps*50;
-
-            }
-        };
-        xmlhttp.open("GET", "stat.json", true);
-        xmlhttp.send();
-
-        </script>
+      <div class='stat meters'>
+        <span class='small'>Total Distance</span>
+        <span class='big' id='meters'>0</span>
       </div>
     </div>
   </div>

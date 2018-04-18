@@ -4,4 +4,5 @@ const LEADER_COLS_WIDTH = [0, 0.08, 0.6, 0.75];
 const LEADER_LINE_HEIGHT = 46 * 1.5;
 
 const DATA_FILE = 'stat_all.json';
+const SWIMMER_DATA_FILE = 'stat.json';
 const UPDATE_INTERVAL = 1000; // in milliseconds
