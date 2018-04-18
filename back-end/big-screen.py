@@ -2,6 +2,20 @@ import os
 import time
 
 wait_time = 5
+base_url= 'http://localhost/Swim-For-Love-Project'
+
+
+def browser(url):
+	os.system("""osascript -e 'tell application "Safari" to set the URL of the front document to " """+url+""" "'""")
+
+def Demo():
+	while True:
+		browser(base_url)
+		UID=input('UID:').upper()
+		browser(base_url+'/swimmers/'+UID+'/index.html')
+		time.sleep(wait_time)
+
+
 
 os.system("""
 osascript -e '
@@ -22,12 +36,5 @@ end tell
 '
 	""")
 
-def browser(url):
-	os.system("""osascript -e 'tell application "Safari" to set the URL of the front document to "http://"""+url+""" "'""")
 
-def Demo():
-	while True:
-		browser('localhost/Swim-For-Love-Project/')
-		UID=input('UID:').upper()
-		browser('localhost/Swim-For-Love-Project/swimmers/'+UID+'/index.html')
-		time.sleep(wait_time)
+Demo()
