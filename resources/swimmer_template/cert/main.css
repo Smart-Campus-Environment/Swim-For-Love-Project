@@ -23,6 +23,8 @@
     background: linear-gradient(-225deg, #22E1FF 0%, #1D8FE1 48%, #625EB1 100%);
 }
 
+/* Header */
+
 .container-header {
     margin: 40px;
     font-size: 22px;
@@ -60,9 +62,9 @@
 }
 
 #avatar {
+    border-radius: 50%;
     width: 400px;
     height: 400px;
-    border-radius: 50%;
     box-shadow: 0px 20px 100px 0px rgba(0, 0, 50, 0.3);
 }
 
@@ -72,13 +74,29 @@
 }
 
 .small {
-    display: block;
-    margin-bottom: -6px;
     font-size: 40px;
     font-weight: bold;
+    margin-bottom: -6px;
+    display: block;
 }
 
 #meters::after {
     content: 'm';
     margin-left: 10px;
+}
+
+@media print {
+
+
+    #avatar {
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0px 20px 100px 0px rgba(0, 0, 50, 0.3);
+    }
+
+    .big {
+    font-size: 60px;
+    font-weight: 200;
+}
 }
