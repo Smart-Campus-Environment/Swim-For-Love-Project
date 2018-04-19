@@ -25,7 +25,7 @@ def demo():
 		end tell
 	end tell
 	'
-	''').strip()
+	'''.strip())
 	while True:
 		open_url(base_url)
 		uid = input('UID:').upper()
