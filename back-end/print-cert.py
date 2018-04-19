@@ -1,43 +1,28 @@
 import os
 import time
+from utils import *
 
 wait_time = 1
 base_url= 'http://localhost/Swim-For-Love-Project'
 
-def browser(url):
-	os.system("""osascript -e 'tell application "Safari" to set the URL of the front document to " """+url+""" "'""")
-
-def Demo():
+def demo():
 	while True:
-		UID=input('UID:').upper()
-		browser(base_url+'/swimmers/'+UID+'/cert/')
-		activate_Safari()
+		uid = input('UID:').upper()
+		open_url('{}/swimmers/{}/cert/'.format(base_url, uid))
+		activate('Safari')
 		time.sleep(wait_time)
-		os.system("""osascript -e 'tell application "System Events" to key code 36'""")
+		os.system('osascript -e \'tell application "System Events" to key code 36\'')
 		time.sleep(wait_time)
-		activate_Terminal()
+		activate('Terminal')
 
-
-
-
-
-def activate_Safari():
-	os.system("""
+def activate(appName):
+	os.system('''
 	osascript -e '
-	tell application "Safari"
+	tell application "{}"
 		activate
 	end tell
 	'
-		""")
+	'''.format(appName))
 
-def activate_Terminal():
-	os.system("""
-	osascript -e '
-	tell application "Terminal"
-		activate
-	end tell
-	'
-		""")
-
-
-Demo()
+if __name__ == '__main__':
+	demo()

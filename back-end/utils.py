@@ -41,3 +41,6 @@ class Logger:
 
 	def critical(self, msg, callback=None):
 		self.log('CRITICAL', msg, callback)
+
+def open_url(url):
+	os.system('osascript -e "tell application \'Safari\' to set the URL of the front document to \'{}\' "'.format(base_url))

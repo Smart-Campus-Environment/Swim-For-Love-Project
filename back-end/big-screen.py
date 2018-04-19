@@ -1,5 +1,6 @@
 import os
 import time
+from utils import *
 
 wait_time = 5
 base_url= 'http://localhost/Swim-For-Love-Project'
