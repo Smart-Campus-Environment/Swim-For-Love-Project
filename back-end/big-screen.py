@@ -3,10 +3,7 @@ import time
 from utils import *
 
 wait_time = 5
-base_url= 'http://localhost/Swim-For-Love-Project'
-
-def open_url(url):
-	os.system('osascript -e "tell application \'Safari\' to set the URL of the front document to \'{}\' "'.format(base_url))
+base_url = 'http://localhost/Swim-For-Love-Project'
 
 def demo():
 	os.system('''
@@ -15,8 +12,11 @@ def demo():
 		activate
 	end tell
 
+	tell application "System Events" to keystroke "t" using command down
 	tell application "System Events" to keystroke "f" using {command down, control down}
-
+	'
+	''')
+	''' Remove click 'Always show toolbar'
 	tell application "System Events"
 		tell process "Safari"
 			tell menu item "Always Show Toolbar in Full Screen" of menu "View" of menu bar 1
@@ -24,8 +24,7 @@ def demo():
 			end tell
 		end tell
 	end tell
-	'
-	'''.strip())
+	'''
 	while True:
 		open_url(base_url)
 		uid = input('UID:').upper()

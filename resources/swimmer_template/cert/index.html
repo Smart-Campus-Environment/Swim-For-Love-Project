@@ -14,13 +14,13 @@
     <div class='container-header'>
       <h1 class='title'>2018<br />Swim For Love</h1>
       <div class='sep'></div>
-      <h2 class='page'>Achievements</h2>
+      <h2 class='page'>Certificate</h2>
     </div>
 
     <!-- Main stats -->
     <div class='container-stat'>
       <div class='stat avatar'>
-        <img id='avatar' src='avatar.jpg'>
+        <img id='avatar' src='../avatar.jpg'>
       </div><br />
       <div class='stat name'>
         <span class='big' id='name'></span>
@@ -38,7 +38,15 @@
 </body>
 
 <script type='text/javascript'>
-setTimeout(() => window.print(), 200);
+    $(document).ready(() => {
+        $.getJSON('../stat.json', raw => {
+            $('#name').text(raw.name);
+            set_stat($('#laps'), raw.laps);
+            set_stat($('#meters'), raw.laps * LAP_LENGTH);
+            document.title = `${raw.name} | Swim For Love`;
+            window.print();
+        });
+    });
 </script>
 
 </html>

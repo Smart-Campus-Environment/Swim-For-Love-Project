@@ -3,7 +3,7 @@ import time
 from utils import *
 
 wait_time = 1
-base_url= 'http://localhost/Swim-For-Love-Project'
+base_url = 'http://localhost/Swim-For-Love-Project'
 
 def demo():
 	while True:

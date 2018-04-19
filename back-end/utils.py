@@ -1,4 +1,5 @@
 import time
+import os
 
 class Logger:
 	'''Parent class for all logging methods.'''
@@ -43,4 +44,4 @@ class Logger:
 		self.log('CRITICAL', msg, callback)
 
 def open_url(url):
-	os.system('osascript -e "tell application \'Safari\' to set the URL of the front document to \'{}\' "'.format(base_url))
+	os.system('osascript -e \'tell application "Safari" to set the URL of the front document to "{}"\''.format(url))

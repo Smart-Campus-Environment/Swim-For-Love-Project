@@ -15,10 +15,9 @@ import pickle
 import json
 import sys
 import os
-import argparse
+import requests
 from config import *
 from utils import *
-from demo import *
 
 logger = Logger('main')
 
@@ -29,7 +28,7 @@ class Swimmer:
 	'''Base class for swimmers.'''
 
 	def __init__(self, uid='', name='Anonymous', lapCount=0):
-		self.uid = uid
+		self.uid = uid.upper()
 		self.name = name
 		self.lapCount = lapCount
 		self.stat = {'name': self.name, 'uid': self.uid, 'laps': self.lapCount}
@@ -38,6 +37,9 @@ class Swimmer:
 		# Create player's directory
 		if not self.dir.is_dir():
 			shutil.copytree(EXAMPLE_DIR.as_posix(), self.dir.as_posix())
+			avatarFile = Path('photos/{}.jpg'.format(self.uid))
+			if avatarFile.is_file():
+				shutil.copy(avatarFile.as_posix(), (self.dir / 'avatar.jpg').as_posix())
 
 	def add_lap(self, n=1):
 		self.lapCount += n
@@ -61,12 +63,6 @@ def load_data():
 	else:
 		swimmers = []
 		dump_data()
-
-def init_data():
-	'''Create names and add it to swimmers.'''
-	global swimmers
-	for i, name in enumerate(DEMO_NAMES):
-		swimmers.append(Swimmer(hex(2625070352 + i)[2:].upper(), name))
 
 def gen_rand_data():
 	'''Simulate and generate random scanned data.'''
@@ -110,7 +106,7 @@ def delete_data_files():
 			elif f.is_dir():
 				shutil.rmtree(f.as_posix())
 			else:
-				logger.warn('Cannot find file or directory {}'.format(f.as_posix()))
+				logger.warning('Cannot find file or directory \'{}\''.format(f.as_posix()))
 		logger.info('Files removed')
 	else:
 		logger.info('Files not removed')
@@ -140,12 +136,26 @@ def update_stat():
 	json.dump(allData, STAT_FILE.open('w', encoding='utf-8'), indent=4)
 	dump_data()
 
+def get_registers():
+	'''Get register info from a remote server.'''
+	req = requests.get(REGISERS_URL)
+	if req.status_code == 200:
+		regs = req.json()
+	else:
+		logger.error('Invalid response code getting registers: [{}]'.format(req.status_code))
+		return -1
+	swimmerIds = [swimmer.uid for swimmer in swimmers]
+	for uid, name in regs.items():
+		if uid not in swimmerIds:
+			swimmers.append(Swimmer(uid, name))
+
 def demo():
 	'''A demonstration that simulates the real life situation.'''
 	while True:
 		if DEBUG:
 			os.system('clear')
-		gen_rand_data()
+		get_registers()
+		gen_rand_data() # remove in non-demo environment
 		analyze_data()
 		update_stat()
 		time.sleep(1)
@@ -161,7 +171,9 @@ if __name__ == '__main__':
 		print(HELP_MSG)
 		exit()
 	if ('--new' in sys.argv or '-n' in sys.argv) or not PICKLE_FILE.is_file():
-		init_data()
+		# init_data()
+		# delete_data_files()
+		pass
 	else:
 		load_data()
 
