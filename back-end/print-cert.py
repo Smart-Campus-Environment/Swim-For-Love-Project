@@ -10,7 +10,7 @@ def browser(url):
 def Demo():
 	while True:
 		UID=input('UID:').upper()
-		browser(base_url+'/swimmers/'+UID+'/cert.html')
+		browser(base_url+'/swimmers/'+UID+'/cert/')
 		activate_Safari()
 		time.sleep(wait_time)
 		os.system("""osascript -e 'tell application "System Events" to key code 36'""")
