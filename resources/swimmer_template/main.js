@@ -8,6 +8,7 @@ function increment(element, updateCount) {
 }
 
 $(document).ready(() => {
+    $.ajaxSetup({cache: false}); // no cache
     $.getJSON(SWIMMER_DATA_FILE, raw => {
         $('#name').text(raw.name);
         increment($('#laps'), raw.laps);
