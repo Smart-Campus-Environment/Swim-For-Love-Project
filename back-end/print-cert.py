@@ -4,7 +4,6 @@ import time
 wait_time = 1
 base_url= 'http://localhost/Swim-For-Love-Project'
 
-
 def browser(url):
 	os.system("""osascript -e 'tell application "Safari" to set the URL of the front document to " """+url+""" "'""")
 
