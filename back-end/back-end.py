@@ -80,13 +80,11 @@ def gen_rand_data():
 def analyze_data():
 	'''Analyze swimmer's data and add laps accordingly.'''
 	scanned_data = {}
-	# if SWIMMER_SCAN_FILE.is_file():
-	# 	scanned_data = json.load(SWIMMER_SCAN_FILE.open(encoding='utf-8'))
-	req = requests.get(SWIMMER_SCAN_URL)
+	req = requests.get(SCANNED_URL)
 	if req.status_code == 200:
 		scanned_data = req.json()
 	else:
-		logger.error('Invalid response code getting registers: [{}]'.format(req.status_code))
+		logger.error('Invalid response code getting scanned data: [{}]'.format(req.status_code))
 		return -1
 
 	if DEBUG:
