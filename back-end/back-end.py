@@ -113,7 +113,7 @@ def delete_data_files():
 	swimmers directories, stat_all.json, scanned.json'''
 	confirm = input('This will remove all data files, proceed? [Y/N]: ')
 	if confirm.upper() in ('Y', 'YES'):
-		for f in (PICKLE_FILE, STAT_FILE, SWIMMERS_DIR):
+		for f in (PICKLE_FILE, STAT_FILE, SWIMMERS_DIR,LOCAL_SCANNED_FILE):
 			if f.is_file():
 				f.unlink()
 			elif f.is_dir():
