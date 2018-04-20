@@ -34,6 +34,7 @@ class Swimmer:
 		self.stat = {'name': self.name, 'uid': self.uid, 'laps': self.lapCount}
 		self.dir = SWIMMERS_DIR / self.uid
 		self.statFile = self.dir / 'stat.json'
+		timestamps[self] = 0
 		# Create player's directory
 		if not self.dir.is_dir():
 			shutil.copytree(EXAMPLE_DIR.as_posix(), self.dir.as_posix())
@@ -158,9 +159,7 @@ def get_registers():
 	swimmerIds = [swimmer.uid for swimmer in swimmers]
 	for uid, name in regs.items():
 		if uid not in swimmerIds:
-			swimmer = Swimmer(uid, name)
-			swimmers.append(swimmer)
-			timestamps[swimmer] = 0
+			swimmers.append(Swimmer(uid, name))
 
 def demo():
 	'''A demonstration that simulates the real life situation.'''
