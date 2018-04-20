@@ -22,7 +22,6 @@ from utils import *
 logger = Logger('main')
 
 DEBUG = False
-global timestamps
 timestamps = {}
 
 class Swimmer:
@@ -156,8 +155,6 @@ def demo():
 		if DEBUG:
 			os.system('clear')
 		get_registers()
-		if Init:
-			timestamps = {swimmer: 0 for swimmer in swimmers}
 		gen_rand_data() # remove in non-demo environment
 		analyze_data()
 		update_stat()
@@ -174,9 +171,10 @@ if __name__ == '__main__':
 		print(HELP_MSG)
 		exit()
 	if ('--new' in sys.argv or '-n' in sys.argv) or not PICKLE_FILE.is_file():
-		Init=True
+		get_registers()
 	else:
 		load_data()
+	timestamps = {swimmer: 0 for swimmer in swimmers}
 	try:
 		demo()
 	except KeyboardInterrupt:
