@@ -164,9 +164,8 @@ def get_registers():
 			swimmers.append(Swimmer(uid, name))
 			timestamps = {swimmer: 0 for swimmer in swimmers}
 			url=REGISTERS_URL+uid+'.jpg'
-			print(url)
 			try:
-				urllib.request.urlretrieve(url,SWIMMER_PATH+uid+'/avatar.jpg')
+				urllib.request.urlretrieve(url,SWIMMERS_PATH+uid+'/avatar.jpg')
 				if DEBUG:
 					logger.debug(name+' Photo Added')
 			except:
