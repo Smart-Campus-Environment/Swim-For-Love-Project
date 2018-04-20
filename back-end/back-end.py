@@ -16,6 +16,7 @@ import json
 import sys
 import os
 import requests
+import urllib
 from config import *
 from utils import *
 
@@ -144,7 +145,7 @@ def update_stat():
 
 def get_registers():
 	'''Get register info from a remote server.'''
-	req = requests.get(REGISERS_URL)
+	req = requests.get(REGISERS_URL+'register.json')
 	if req.status_code == 200:
 		regs = req.json()
 	else:
@@ -154,6 +155,9 @@ def get_registers():
 	for uid, name in regs.items():
 		if uid not in swimmerIds:
 			swimmers.append(Swimmer(uid, name))
+			url=REGISERS_URL+uid+'.jpg'
+			print(url)
+			urllib.request.urlretrieve(url,'swimmers/'+uid+'/avatar.jpg')
 
 def demo():
 	'''A demonstration that simulates the real life situation.'''
