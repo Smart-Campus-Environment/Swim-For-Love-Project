@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'DINPro';
     font-weight: 200;
-    src: url('../../resources/DINPro-Light.otf') format('opentype');
+    src: url('../../../resources/DINPro-Light.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'DINPro';
     font-weight: bold;
-    src: url('../../resources/DINPro-Bold.otf') format('opentype');
+    src: url('../../../resources/DINPro-Bold.otf') format('opentype');
 }
 
 * {

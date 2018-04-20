@@ -163,13 +163,6 @@ def get_registers():
 		if uid not in swimmerIds:
 			swimmers.append(Swimmer(uid, name))
 			timestamps = {swimmer: 0 for swimmer in swimmers}
-			url=REGISTERS_URL+uid+'.jpg'
-			try:
-				urllib.request.urlretrieve(url,SWIMMERS_PATH+uid+'/avatar.jpg')
-				if DEBUG:
-					logger.debug(name+' Photo Added')
-			except:
-				logger.debug(name+' Photo Not Found')
 
 def demo():
 	'''A demonstration that simulates the real life situation.'''
