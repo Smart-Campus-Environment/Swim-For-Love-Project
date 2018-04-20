@@ -191,5 +191,6 @@ if __name__ == '__main__':
 	try:
 		demo()
 	except KeyboardInterrupt:
-		dump_data()
-		logger.info('Good bye')
+		# dump_data()
+		# logger.info('Good bye')
+		pass
