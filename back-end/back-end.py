@@ -150,7 +150,6 @@ def get_registers():
 
 def demo():
 	'''A demonstration that simulates the real life situation.'''
-	global timestamps
 	while True:
 		if DEBUG:
 			os.system('clear')
