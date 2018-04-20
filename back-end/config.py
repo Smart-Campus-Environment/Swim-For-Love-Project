@@ -11,7 +11,7 @@ REGISTERS_URL = REMOTE_ROOT + 'register/'
 REGISTER_FILE_URL = REGISTERS_URL + 'register.json'
 SCANNED_URL = REMOTE_ROOT + 'scanned.json'
 
-# Thresholds
+# Signal Handling
 MIN_SIGNAL_STRENGTH = -50
 MAX_SIGNAL_STRENGTH = -5
 DETECTION_INTERVAL = 20
