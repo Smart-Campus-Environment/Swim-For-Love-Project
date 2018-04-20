@@ -4,7 +4,7 @@
  | (___  \ \  /\  / /  | | | \  / |  | |__ | |  | | |__) |  | |   | |  | \ \  / /| |__
   \___ \  \ \/  \/ /   | | | |\/| |  |  __|| |  | |  _  /   | |   | |  | |\ \/ / |  __|
   ____) |  \  /\  /   _| |_| |  | |  | |   | |__| | | \ \   | |___| |__| | \  /  | |____
- |_____/    \/  \/   |_____|_|  |_|  |_|    \____/|_|  \_\  |______\____/   \/   |______|
+ |_____/    \/  \/   |_____|_|  |_|  |_|    \____/|_|  \_\  |______\____/   \/   |______|   2018
 
 '''
 
@@ -22,6 +22,7 @@ from utils import *
 logger = Logger('main')
 
 DEBUG = False
+global timestamps
 timestamps = {}
 
 class Swimmer:
@@ -84,7 +85,6 @@ def analyze_data():
 		scanned_data = json.load(SWIMMER_SCAN_FILE.open(encoding='utf-8'))
 	if DEBUG:
 		logger.debug(scanned_data)
-
 	for uid, strength in scanned_data.items():
 		for swimmer, ticks in timestamps.items():
 			timestamp = time.time()
@@ -151,10 +151,13 @@ def get_registers():
 
 def demo():
 	'''A demonstration that simulates the real life situation.'''
+	global timestamps
 	while True:
 		if DEBUG:
 			os.system('clear')
 		get_registers()
+		if Init:
+			timestamps = {swimmer: 0 for swimmer in swimmers}
 		gen_rand_data() # remove in non-demo environment
 		analyze_data()
 		update_stat()
@@ -171,13 +174,9 @@ if __name__ == '__main__':
 		print(HELP_MSG)
 		exit()
 	if ('--new' in sys.argv or '-n' in sys.argv) or not PICKLE_FILE.is_file():
-		# init_data()
-		# delete_data_files()
-		pass
+		Init=True
 	else:
 		load_data()
-
-	timestamps = {swimmer: 0 for swimmer in swimmers}
 	try:
 		demo()
 	except KeyboardInterrupt:
