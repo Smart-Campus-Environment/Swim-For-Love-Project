@@ -4,7 +4,7 @@
   <meta charset='utf-8'>
   <link rel='icon' href='favicon.ico' type='image/x-icon' />
   <link rel='stylesheet' href='main.css'>
-  <script type='text/javascript' src='../../libraries/jquery.min.js'></script>
+  <script type='text/javascript' src='../../../libraries/jquery.min.js'></script>
   <title>Personal Stats | Swim For Love</title>
 </head>
 
@@ -41,8 +41,8 @@
     $(document).ready(() => {
         $.getJSON('../stat.json', raw => {
             $('#name').text(raw.name);
-            set_stat($('#laps'), raw.laps);
-            set_stat($('#meters'), raw.laps * LAP_LENGTH);
+            $('#laps').text(raw.laps);
+            $('#meters').text(raw.laps*50);
             document.title = `${raw.name} | Swim For Love`;
             window.print();
         });
