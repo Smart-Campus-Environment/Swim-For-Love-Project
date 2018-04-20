@@ -6,9 +6,14 @@ EXAMPLE_DIR = Path('resources/swimmer_template')
 PICKLE_FILE = Path('Swimmer_Database.pickle')
 STAT_FILE = Path('stat_all.json')
 SWIMMER_SCAN_FILE = Path('scanned.json')
+<<<<<<< HEAD
 REGISERS_URL = 'http://localhost/Swim-For-Love-Project/register/'
 # REGISERS_URL = 'http://localhost/swim4love/register.json'
 SWIMMER_SCAN_URL = 'http://localhost/Swim-For-Love-Project/scanned.json'
+=======
+REGISERS_URL = 'http://localhost/Swim-For-Love-Project/register.json'
+SCANNED_URL = 'http://localhost/Swim-For-Love-Project/scanned.json'
+>>>>>>> f51434dff274b3e033832958848e3a26dde90149
 
 # Thresholds
 MIN_SIGNAL_STRENGTH = -50
