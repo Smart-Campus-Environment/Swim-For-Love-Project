@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'DINPro';
     font-weight: 200;
-    src: url('../../resources/DINPro-Light.otf') format('opentype');
+    src: url('../../../resources/DINPro-Light.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'DINPro';
     font-weight: bold;
-    src: url('../../resources/DINPro-Bold.otf') format('opentype');
+    src: url('../../../resources/DINPro-Bold.otf') format('opentype');
 }
 
 @page {
@@ -19,14 +19,16 @@
     margin: 0;
     font-family: 'DINPro', sans-serif;
     color: white;
+    -webkit-print-color-adjust: exact!important;
+
 }
 
 .container-main {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(-225deg, #22E1FF 0%, #1D8FE1 48%, #625EB1 100%);
-    -webkit-print-color-adjust: exact; /* for printing backgrounds */
+    background: linear-gradient(-225deg, #22E1FF 0%, #1D8FE1 48%, #625EB1 100%)!important;
+    -webkit-print-color-adjust: exact!important; /* for printing backgrounds */
 }
 
 .container-header {
@@ -54,7 +56,7 @@
 }
 
 .stat.avatar {
-    margin-bottom: 20px;
+    margin-bottom: -15px;
 }
 
 .stat.name span {

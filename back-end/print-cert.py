@@ -2,17 +2,26 @@ import os
 import time
 from utils import *
 
-wait_time = 1
+
 base_url = 'http://localhost/Swim-For-Love-Project'
 
 def demo():
 	while True:
 		uid = input('UID:').upper()
-		open_url('{}/swimmers/{}/cert/'.format(base_url, uid))
-		activate('Safari')
-		time.sleep(wait_time)
+		# open_url('{}/swimmers/{}/cert/'.format(base_url, uid))
+		os.system("""osascript -e'
+tell application "Google Chrome"
+	if it is running then
+		quit
+	end if
+	activate
+	open location " """+base_url+'/swimmers/'+uid+'/cert/'+""" "
+end tell'
+			""")
+		# activate('')
+		time.sleep(3)
 		os.system('osascript -e \'tell application "System Events" to key code 36\'')
-		time.sleep(wait_time)
+		time.sleep(0.5)
 		activate('Terminal')
 
 def activate(appName):
