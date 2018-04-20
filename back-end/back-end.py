@@ -143,6 +143,7 @@ def update_stat():
 
 def get_registers():
 	'''Get register info from a remote server.'''
+	global timestamps
 	req = requests.get(REGISERS_URL+'register.json')
 	if req.status_code == 200:
 		regs = req.json()
@@ -153,9 +154,14 @@ def get_registers():
 	for uid, name in regs.items():
 		if uid not in swimmerIds:
 			swimmers.append(Swimmer(uid, name))
+			timestamps = {swimmer: 0 for swimmer in swimmers}
 			url=REGISERS_URL+uid+'.jpg'
-			print(url)
-			urllib.request.urlretrieve(url,'swimmers/'+uid+'/avatar.jpg')
+			try:
+				urllib.request.urlretrieve(url,'swimmers/'+uid+'/avatar.jpg')
+				if DEBUG:
+					logger.debug(name+' Photo Added')
+			except:
+				logger.debug(name+' Photo Not Found')
 
 def demo():
 	'''A demonstration that simulates the real life situation.'''
@@ -186,5 +192,6 @@ if __name__ == '__main__':
 	try:
 		demo()
 	except KeyboardInterrupt:
-		dump_data()
-		logger.info('Good bye')
+		# dump_data()
+		# logger.info('Good bye')
+		pass
