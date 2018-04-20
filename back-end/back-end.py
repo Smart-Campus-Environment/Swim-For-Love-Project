@@ -23,7 +23,6 @@ from utils import *
 logger = Logger('main')
 
 DEBUG = False
-timestamps = {}
 
 class Swimmer:
 	'''Base class for swimmers.'''
@@ -78,7 +77,6 @@ def gen_rand_data():
 	num_detected = random.randint(0, len(swimmers))
 	n = random.randint(0, 5)
 	scanned = {}
-
 	while n < len(swimmers):
 		scanned[swimmers[n].uid] = -random.randint(5, 100)
 		n += random.randint(0, 3)
@@ -113,7 +111,7 @@ def delete_data_files():
 	swimmers directories, stat_all.json, scanned.json'''
 	confirm = input('This will remove all data files, proceed? [Y/N]: ')
 	if confirm.upper() in ('Y', 'YES'):
-		for f in (PICKLE_FILE, STAT_FILE, SWIMMERS_DIR,LOCAL_SCANNED_FILE):
+		for f in (PICKLE_FILE, STAT_FILE, SWIMMERS_DIR, LOCAL_SCANNED_FILE):
 			if f.is_file():
 				f.unlink()
 			elif f.is_dir():
@@ -153,16 +151,16 @@ def get_registers():
 	'''Get register info from a remote server.'''
 	global timestamps
 	req = requests.get(REGISTER_FILE_URL)
-	if req.status_code == 200:
-		regs = req.json()
-	else:
+	if req.status_code != 200:
 		logger.error('Error status code [{}] when getting registers'.format(req.status_code))
 		return -1
+	regs = req.json()
 	swimmerIds = [swimmer.uid for swimmer in swimmers]
 	for uid, name in regs.items():
 		if uid not in swimmerIds:
-			swimmers.append(Swimmer(uid, name))
-			timestamps = {swimmer: 0 for swimmer in swimmers}
+			swimmer = Swimmer(uid, name)
+			swimmers.append(swimmer)
+			timestamps[swimmer] = 0
 
 def demo():
 	'''A demonstration that simulates the real life situation.'''
@@ -177,6 +175,7 @@ def demo():
 
 if __name__ == '__main__':
 	swimmers = []
+	timestamps = {}
 	if '--debug' in sys.argv or '-d' in sys.argv:
 		DEBUG = True
 	if '--clear-data' in sys.argv or '-c' in sys.argv:
