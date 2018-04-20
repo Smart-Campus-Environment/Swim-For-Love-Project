@@ -38,9 +38,17 @@ class Swimmer:
 		# Create player's directory
 		if not self.dir.is_dir():
 			shutil.copytree(EXAMPLE_DIR.as_posix(), self.dir.as_posix())
-			avatarFile = Path('photos/{}.jpg'.format(self.uid))
-			if avatarFile.is_file():
-				shutil.copy(avatarFile.as_posix(), (self.dir / 'avatar.jpg').as_posix())
+			# Get avatar
+			avatarUrl = '{}/{}.jpg'.format(REGISTERS_URL, self.uid)
+			req = requests.get(avatarUrl, timeout=20, stream=True)
+			if req.status_code == 200:
+				with (self.dir / 'avatar.jpg').open('wb') as file:
+					req.raw.decode_content = True
+					shutil.copyfileobj(req.raw, file)
+			elif req.status_code == 404:
+				pass # no avatar file
+			else:
+				logger.error('Error status code [{}] when downloading avatar for "{}"'.format(self.uid))
 
 	def add_lap(self, n=1):
 		self.lapCount += n
@@ -76,7 +84,7 @@ def gen_rand_data():
 		n += random.randint(0, 3)
 	if DEBUG:
 		logger.debug(json.dumps(scanned, sort_keys=True, indent=4))
-	json.dump(scanned, SWIMMER_SCAN_FILE.open('w', encoding='utf-8'), indent=4)
+	json.dump(scanned, LOCAL_SCANNED_FILE.open('w', encoding='utf-8'), indent=4)
 
 def analyze_data():
 	'''Analyze swimmer's data and add laps accordingly.'''
@@ -85,7 +93,7 @@ def analyze_data():
 	if req.status_code == 200:
 		scanned_data = req.json()
 	else:
-		logger.error('Invalid response code getting scanned data: [{}]'.format(req.status_code))
+		logger.error('Error status code [{}] when getting scanned data'.format(req.status_code))
 		return -1
 
 	if DEBUG:
@@ -105,7 +113,7 @@ def delete_data_files():
 	swimmers directories, stat_all.json, scanned.json'''
 	confirm = input('This will remove all data files, proceed? [Y/N]: ')
 	if confirm.upper() in ('Y', 'YES'):
-		for f in (PICKLE_FILE, STAT_FILE, SWIMMER_SCAN_FILE, SWIMMERS_DIR):
+		for f in (PICKLE_FILE, STAT_FILE, SWIMMERS_DIR):
 			if f.is_file():
 				f.unlink()
 			elif f.is_dir():
@@ -143,19 +151,16 @@ def update_stat():
 
 def get_registers():
 	'''Get register info from a remote server.'''
-	req = requests.get(REGISERS_URL+'register.json')
+	req = requests.get(REGISTER_FILE_URL)
 	if req.status_code == 200:
 		regs = req.json()
 	else:
-		logger.error('Invalid response code getting registers: [{}]'.format(req.status_code))
+		logger.error('Error status code [{}] when getting registers'.format(req.status_code))
 		return -1
 	swimmerIds = [swimmer.uid for swimmer in swimmers]
 	for uid, name in regs.items():
 		if uid not in swimmerIds:
 			swimmers.append(Swimmer(uid, name))
-			url=REGISERS_URL+uid+'.jpg'
-			print(url)
-			urllib.request.urlretrieve(url,'swimmers/'+uid+'/avatar.jpg')
 
 def demo():
 	'''A demonstration that simulates the real life situation.'''
