@@ -4,8 +4,8 @@ from config import *
 
 def Add_Photo():
 	try:
-	photo_name=os.listdir(TEMP_PHOTO_PATH)[0]
-	os.rename(TEMP_PHOTO_PATH+photo_name,REGISTER_PATH+uid+'.jpg')
+		photo_name=os.listdir(TEMP_PHOTO_PATH)[0]
+		os.rename(TEMP_PHOTO_PATH+photo_name,REGISTER_PATH+uid+'.jpg')
 	except:
 		decision=input('Photo does not exist in File, proceed? (Y/N):').lower()
 		if decision=='y' or decision=='yes':

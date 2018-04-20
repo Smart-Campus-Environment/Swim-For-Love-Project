@@ -7,6 +7,7 @@ PICKLE_FILE = Path('Swimmer_Database.pickle')
 STAT_FILE = Path('stat_all.json')
 LOCAL_SCANNED_FILE = Path('scanned.json')
 REGISTER_FILE_PATH=Path('register/register.json')
+SWIMMERS_PATH='swimmers/'
 TEMP_PHOTO_PATH='register/temp_photo/'
 REGISTER_PATH='register/'
 REMOTE_ROOT = 'http://localhost/Swim-For-Love-Project/'
