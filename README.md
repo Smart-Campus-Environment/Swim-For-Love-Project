@@ -18,15 +18,16 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 5. Read from Save Function
 6. New Feature: BigScreenDisplay.py
 	Open Safari to set URL, and waits for input to take to swimmer stat page.
+7. Add new swimmer.
 
 
 # To-Do's
 
 1. Read from RFID Reader
 2. Check swimmer status
-3. Individual Swimmer Stat Page
-4. Certificate HTML5 Page
-5. Playground_Auth HTML5 Page
+3. ~~Individual Swimmer Stat Page~~
+4. ~~Certificate HTML5 Page~~
+5. ~~Playground_Auth HTML5 Page~~
 6. Milestone Congrats
 
 # How to Run
