@@ -5,11 +5,12 @@
   <link rel='icon' href='favicon.ico' type='image/x-icon' />
   <link rel='stylesheet' href='main.css'>
   <script type='text/javascript' src='../../../libraries/jquery.min.js'></script>
+  <script type='text/javascript' src='../../../scripts/config.js'></script>
   <title>Personal Stats | Swim For Love</title>
 </head>
 
 <body>
-  <div class='container-main'>
+  <div id='bg' class='container-main'>
     <!-- Header -->
     <div class='container-header'>
       <h1 class='title'>2018<br />Swim For Love</h1>
@@ -38,8 +39,24 @@
 </body>
 
 <script type='text/javascript'>
+  function BG_Update(laps){
+    if (laps<BRONZE_MEDAL_LAP_COUNT){
+        document.getElementById("bg").style.background = NO_MEDAL_BG;
+    }
+    else if (laps>=BRONZE_MEDAL_LAP_COUNT && laps<SILVER_MEDAL_LAP_COUNT){
+        document.getElementById("bg").style.background = BRONZE_MEDAL_BG;
+    }
+    else if (laps>=SILVER_MEDAL_LAP_COUNT && laps<GOLD_MEDAL_LAP_COUNT){
+        document.getElementById("bg").style.background = SILVER_MEDAL_BG; 
+    }
+    else if (laps>=GOLD_MEDAL_LAP_COUNT){
+        document.getElementById("bg").style.background = GOLD_MEDAL_BG; 
+    }
+
+}
     $(document).ready(() => {
         $.getJSON('../stat.json', raw => {
+            BG_Update(raw.laps)
             $('#name').text(raw.name);
             $('#laps').text(raw.laps);
             $('#meters').text(raw.laps*50);
