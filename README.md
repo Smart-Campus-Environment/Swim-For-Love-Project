@@ -8,8 +8,6 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 
 # Functionalities
 
-
-
 1. Swimmer as an Object
 2. Add Swimmer
 3. Update stat_all.json
@@ -23,12 +21,12 @@ A project for counting laps and displaying a leaderboard for the Swim For Love e
 
 # To-Do's
 
-1. Read from RFID Reader
-2. Check swimmer status
-3. ~~Individual Swimmer Stat Page~~
-4. ~~Certificate HTML5 Page~~
-5. ~~Playground_Auth HTML5 Page~~
-6. Milestone Congrats
+- [ ] Read from RFID Reader
+- [ ] Check swimmer status
+- [x] Individual Swimmer Stat Page
+- [x] Certificate HTML5 Page
+- [x] Playground_Auth HTML5 Page
+- [ ] Milestone Congrats
 
 # How to Run
 
