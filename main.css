@@ -1,3 +1,12 @@
+footer{
+
+    position: fixed;
+    bottom: 10px;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+}
+
 @font-face {
     font-family: 'DINPro';
     font-weight: 200;
