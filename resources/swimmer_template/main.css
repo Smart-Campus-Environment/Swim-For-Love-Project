@@ -1,3 +1,11 @@
+footer{
+
+    position: fixed;
+    bottom: 10px;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+}
 canvas {
   overflow-y: hidden;
   overflow-x: hidden;
