@@ -11,7 +11,7 @@ def add_photo():
 			print(name+' Photo Addded')
 			break
 		elif len(file_list) == 0:
-			pass		
+			pass
 		elif len(file_list) > 1:
 			print('There are more than one file in Temp_File Folder')
 			input('Please Press Enter after leaving one picture.')
@@ -23,4 +23,3 @@ while True:
 	swimmersData[uid] = name
 	add_photo()
 	json.dump(swimmersData, REGISTER_FILE_PATH.open('w', encoding='utf-8'), indent=4)
-
