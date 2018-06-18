@@ -12,7 +12,7 @@ $(document).ready(() => {
     if (!($(document).width() === 1920 && $(document).height() === 1080)) console.warn('Your screen dimensions might not be optimized to display this page. Consider changing to a 1920×1080 size.');
     $.ajaxSetup({cache: false}); // no cache
     initLeaderboard();
-    socket = io.connect(SOCKET_URL);
+    socket = io.connect(SERVER_URL);
     socket.on('init', raw => process_data(raw, () => topTen.forEach((e, i) => insert_player(e, null, i))));
     socket.on('swimmers', process_data);
     tallyLap = $('.tally.laps.num');
@@ -29,14 +29,16 @@ function process_data(raw, callback=update_leaderboard) {
         if (timestamp[id] === undefined || (previousData[id] !== undefined && e.laps - previousData[id] !== 0)) {
             timestamp[id] = Date.now() + i;
         }
-        previousData[id] = e.laps;
     });
     data.sort((a, b) => a.laps > b.laps ? -1 : (a.laps < b.laps ? 1 : timestamp[a.id] < timestamp[b.id] ? -1 : 1));
     let newTotal = data.map(e => e.laps).reduce((a, b) => a + b);
     tally(newTotal);
     topTen = data.slice(0, 10);
-    callback();
     leaderboard = topTen;
+    callback();
+    data.forEach((e, i) => {
+        previousData[e.id] = e.laps;
+    });
 }
 
 function update_leaderboard() {
@@ -57,7 +59,8 @@ function update_leaderboard() {
             insert_player(e, null, i, false);
             return;
         }
-        let diffLaps = laps - parseInt($(`#${id} .laps`).text());
+        // let diffLaps = laps - parseInt($(`#${id} .laps`).text());
+        let diffLaps = laps - previousData[id];
         if (diffLaps !== 0) {
             increment($(`#${id} .laps`), diffLaps);
             increment($(`#${id} .meters`), diffLaps * LAP_LENGTH);
@@ -67,7 +70,9 @@ function update_leaderboard() {
 }
 
 function tally(newTotal) {
-    let tallyDiff = newTotal - totalLaps;
+    // let tallyDiff = newTotal - totalLaps;
+    let tallyDiff = newTotal;
+    if (Object.keys(previousData).length !== 0) tallyDiff -= Object.values(previousData).reduce((a, b) => a + b);
     if (tallyDiff !== 0) {
         increment(tallyLap, tallyDiff);
         increment(tallyMeter, tallyDiff * LAP_LENGTH);

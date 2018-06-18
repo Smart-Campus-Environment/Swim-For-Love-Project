@@ -28,6 +28,7 @@ function insert_player(player, compareArray=leaderboard, insertRank=null, init=t
     let name = player.name;
     let laps = player.laps;
     let id = player.id;
+    if (laps === 0) return;
     let meters = laps * LAP_LENGTH;
     let rank = (![null, undefined, NaN].includes(insertRank)) ? insertRank : get_rank(laps, compareArray);
     let initPos = init ? (rank + 2) * LEADER_LINE_HEIGHT : 800; // for rise up animation
