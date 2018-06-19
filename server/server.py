@@ -58,11 +58,11 @@ def get_user_info(userid):
 def get_user_avatar(userid):
     if userid not in swimmers_data:
         return resp({'status': 1, 'msg': 'Swimmer ID not found'})
-    avatar_DIR = AVATAR_DIR / '{}.jpg'.format(userid)
-    if not avatar_DIR.is_file():
+    avatar = AVATAR_DIR / '{}.jpg'.format(userid)
+    if not avatar.is_file():
         # return resp({'status': 3, 'msg': 'Swimmer avatar file not found'})
         return send_file((AVATAR_DIR / 'default.jpg').as_posix(), mimetype='image/jpg')
-    return send_file(avatar_DIR.as_posix(), mimetype='image/jpg')
+    return send_file(avatar.as_posix(), mimetype='image/jpg')
 
 @app.route('/swimmer/start-record/<userid>')
 def start_record(userid):
@@ -206,7 +206,10 @@ def personal_page(userid, path):
 @socketio.on('connect')
 def new_connection():
     app.logger.info('New leaderboard connection')
-    emit('init', swimmers_data, json=True)
+    try:
+        emit('init', swimmers_data, json=True)
+    except Exception as e:
+        app.logger.error(str(e))
 
 def broadcast_swimmers():
     socketio.emit('swimmers', swimmers_data, json=True)
