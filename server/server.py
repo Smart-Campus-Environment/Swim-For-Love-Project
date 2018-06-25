@@ -5,8 +5,8 @@ from threading import Thread
 import shutil
 import os
 from flask import Flask, Response, request, send_file, send_from_directory, render_template, abort
-from flask_cors import CORS, cross_origin
-from flask_socketio import SocketIO, send, emit
+from flask_cors import CORS
+from flask_socketio import SocketIO, emit
 
 logging.basicConfig(filename='access.log', level=logging.DEBUG)
 
