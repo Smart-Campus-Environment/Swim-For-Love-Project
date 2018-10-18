@@ -1,0 +1,1 @@
+define({  "name": "Swim For Love",  "version": "0.0.1",  "description": "API for the Swim For Love event server.",  "template": {    "forceLanguage": "en"  },  "sampleUrl": false,  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2018-06-14T15:16:33.812Z",    "url": "http://apidocjs.com",    "version": "0.17.6"  }});

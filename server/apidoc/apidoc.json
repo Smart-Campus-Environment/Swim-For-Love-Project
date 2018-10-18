@@ -1,0 +1,8 @@
+{
+  "name": "Swim For Love",
+  "version": "0.0.1",
+  "description": "API for the Swim For Love event server.",
+  "template": {
+    "forceLanguage": "en"
+  }
+}
